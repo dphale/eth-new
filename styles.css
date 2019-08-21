@@ -1,0 +1,180 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#headline {
+  padding: 0.8em;
+  color: white;
+  font-family: Roboto, helvetica, arial, sans-serif;
+  background-color: black;
+  background-image: url(images/hero-Zimbabwe-coffee-Tanya.jpg);
+  background-size: cover;
+}
+
+#headline h1 {
+  font-weight: 200;
+  font-size: 60px;
+  line-height: 1em;
+  margin-bottom: 0;
+}
+
+#headline h2 {
+  font-weight: 200;
+  font-size: 30px;
+  margin-top: 5px;
+}
+
+#headline #blurb {
+  font-weight: 300;
+  font-size: 18px;
+}
+
+#headline #register {
+  background-color: #00b1ac;
+  background-color: rgba(57,177, 164, 0.7);
+  padding: 1em;
+}
+
+#headline #register h2 {
+  font-weight: 100;
+  padding: 0;
+  margin: 0;
+}
+
+#headline label {
+  font-size: 1em;
+  font-weight: 200;
+  padding-top: 12px;
+  display: block;
+}
+
+.triviaAnswer {
+  font-size: 18px;
+  font-weight: 200;
+  padding: 20px;
+}
+
+#register button[type=button] {
+  background-color: hsl(8, 70%, 54%);
+  width: 90%;
+  color: white;
+  margin-top: 10px;
+  padding: 5px;
+  border: none;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+#register input[type=number] {
+  background-color: white;
+  width: 90%;
+  color: black;
+  margin-top: 10px;
+  text-align: center;
+  padding: 5px;
+  border: none;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+#getNext {
+  width: 200px;
+}
+
+.button {
+  display : block;
+  width: 100%;
+  color: gray;
+  margin-top: 5px;
+  padding: 2px;
+  border-color: grey;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+
+#section {
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: white;
+  font-family: Roboto, sans-serif;
+  font-weight: 100;
+  font-size: 18px;
+}
+
+#section h2 {
+  margin-top: 10px;
+}
+
+footer {
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  text-align: center;
+  background-color: hsl(8, 70%, 54%);
+  color: white;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+@media screen and (min-width: 600px) {
+  .container {
+    margin: auto;
+    max-width: 750px;
+  }
+
+  #headline {
+    padding: 20px 5%;
+  }
+
+  #headline #blurb {
+    float: left;
+    font-weight: 200;
+    width: 50%;
+    font-size: 18px;
+    box-sizing: border-box;
+    padding-right: 10px;
+  }
+
+  #headline br {
+    clear: both;
+  }
+
+  #headline #register {
+    float: right;
+    padding: 20px;
+    width: 50%;
+    box-sizing: border-box;
+    font-weight: 300;
+  }
+
+  #section {
+    box-sizing: border-box;
+    padding: 10px 10% 10px 10%;
+  }
+
+  #section br {
+    clear:  both;
+  }
+
+  #imageSection {
+    float:left;
+    width: 50%;
+    padding: 20px 5%;
+  }
+
+  #image {
+    width: 100%;
+    height:auto;
+    box-sizing: border-box;
+    box-shadow: black 0px 0px 5px;
+  }
+
+  .triviaAnswer  {
+    float: right;
+    padding: 20px 5%;
+    width: 50%;
+    box-sizing: border-box;
+    font-weight: 300;
+  }
+}
