@@ -6,7 +6,6 @@ contract UserList {
   struct User {
     uint listNum;
     uint userID;
-    bool completed;
   }
 
   mapping(uint => User) public users;
@@ -17,7 +16,7 @@ contract UserList {
 
   function createUser(uint _userID) public {
     userCount ++;
-    users[userCount] = User(userCount, _userID, false);
+    users[userCount] = User(userCount, _userID);
   }
 
 }
