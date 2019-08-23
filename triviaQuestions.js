@@ -1,7 +1,7 @@
 var triviaQuestions = [
   {
     question : "How many farmers grow coffee globally (millions)?",
-    image : "images/parchiment.jpg",
+    image : "../images/parchiment.jpg",
     imageName :"Coffee parchiment",
     answer : ["10","15","20"],
     correctAnswer : "a",
@@ -9,7 +9,7 @@ var triviaQuestions = [
   },
   {
     question : "In how many countries does TechnoServe have entrepreneurship training programs?",
-    image : "images/smartDuka.jpg",
+    image : "../images/smartDuka.jpg",
     imageName : "Duka Owner",
     answer : ["13","19","24"],
     correctAnswer : "c",
@@ -17,7 +17,7 @@ var triviaQuestions = [
   },
   {
     question : "What is one solution for 'remote sensing?",
-    image : "images/drone.jpg",
+    image : "../images/drone.jpg",
     imageName : "Drone",
     answer : ["SMS", "Drones", "Distributed Applications"],
     correctAnswer : "b",
@@ -25,7 +25,7 @@ var triviaQuestions = [
   },
   {
     question : "In how many countries does TechnoServe operate?",
-    image : "images/drone.jpg",
+    image : "../images/drone.jpg",
     imageName : "Drone",
     answer : ["17", "29", "48"],
     correctAnswer : "b",
@@ -33,7 +33,7 @@ var triviaQuestions = [
   },
   {
     question : "How many people saw their incomes increase as a result of TechnoServe's work?",
-    image : "images/drone.jpg",
+    image : "../images/drone.jpg",
     imageName : "Drone",
     answer : ["85,000 people", "557,000 people", "8 million people"],
     correctAnswer : "b",
@@ -41,7 +41,7 @@ var triviaQuestions = [
   },
   {
     question : "What technology can be used to implement smart contracts and improve supply chain transparency in low trust environments?",
-    image : "images/drone.jpg",
+    image : "../images/drone.jpg",
     imageName : "Drone",
     answer : ["Blockchain", "Mobile Money", "Remote Sensing"],
     correctAnswer : "a",
@@ -49,7 +49,7 @@ var triviaQuestions = [
   },
   {
     question : "What percent of coffee farmers, globally, has TechnoServed trained with better agronomy practices to improve their incomes?",
-    image : "images/drone.jpg",
+    image : "../images/drone.jpg",
     imageName : "Drone",
     answer : ["3 percent", "5 percent", "6 percent"],
     correctAnswer : "c",
@@ -57,7 +57,7 @@ var triviaQuestions = [
   },
   {
     question : "What percentage of the entrepreneurs TechnoServe works with are women?",
-    image : "images/smartDuka.jpg",
+    image : "../images/smartDuka.jpg",
     imageName : "Duka owner",
     answer : ["39%", "45%", "58%"],
     correctAnswer : "c",
@@ -65,7 +65,7 @@ var triviaQuestions = [
   },
   {
     question : "What technology can be used to classify aerial images, to identify whether farmers have implemented agronomic best practices?",
-    image : "images/drone.jpg",
+    image : "../images/drone.jpg",
     imageName : "Drone",
     answer : ["Machine Learning", "Virtual Reality", "Internet of Things (IoT)"],
     correctAnswer : "a",
@@ -73,7 +73,7 @@ var triviaQuestions = [
   },
   {
     question : "How many TechnoServe Fellow alums are there worldwide, since the TechnoServe Fellows program started in 2000?",
-    image : "images/drone.jpg",
+    image : "../images/drone.jpg",
     imageName : "Drone",
     answer : ["1300", "900", "490"],
     correctAnswer : "a",
