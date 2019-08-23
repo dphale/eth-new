@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+  <head>
+    <title>TNS Labs - SV Launch Event</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../styles.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+
+  <body>
+
+    <!-- // [START headline] -->
+    <div id="headline">
+      <div class="container">
+        <header>
+          <h1>TNS Labs</h1>
+          <h2>SF Launch Event</h2>
+        </header>
+        <div id="blurb">
+          <p>TNS Labs will identify, test, and implement technology to scale impact in the fight against poverty, leveraging TechnoServe's on-the-ground experience and strategic market-based approach</p>
+          <p>Answer some trivia questions about TechnoServe's work, and we will have a gift for you when you leave!</p>
+        </div>
+        <div id="register">
+           <h2>Join us for some fun</h2>
+           <input type="number" placeholder="namecard ID" id="nameCardID" required>
+           <button type="button" onclick="getID()">Check in</button>
+           <small><span id="account"></span></small>
+        </div>
+        <br>
+      </div>
+    </div>
+    <!-- // [END headline] -->
+
+    <!-- // [START questions] -->
+    <div id="section">
+      <div class="container">
+        <header>
+          <h2>Learn More About TechnoServe</h2>
+          <p><span id="userPrompt"></span><span id="quizStatus"></span></p>
+          <p id="backgroundInfo"></p>
+          <button type="button" class="button" onclick="renderQuestion()" id="getNext">Next Question</button>
+        </header>
+
+        <div id="imageSection">
+          <img id="image">
+        </div>
+
+        <div class=triviaAnswer id=triviaAnswer>
+          <p id="q1"></p>
+          <button type="button" class="button" onclick="checkAnswer('a')" id="a">
+          <button type="button" class="button" onclick="checkAnswer('b')" id="b">
+          <button type="button" class="button" onclick="checkAnswer('c')" id="c">
+        </div>
+        <br>
+      </div>
+    </div>
+
+    <!-- // [END questions] -->
+
+    <!-- // [START footer] -->
+    <footer>
+      <div class="container">
+        <p>add a footer later with launch date, location</p>
+      </div>
+    </footer>
+    <!-- // [END footer] -->
+
+  </body>
+
+  <!-- external js file with questions in "triviaQuestion array variable" -->
+  <script type="text/javascript" src="../triviaQuestions.js"></script>
+
+  <script>
+
+    var userResponse, currentQuestion, correctAnswer, nameCardID;
+    let questionNum = 0;  //note that questions start with 0
+    let numCorrect = 0;
+    let numArray = [];
+    let maxQuestions = 3;
+    let passed = false;
+
+    //focus on element to enter nameCardID tag
+    document.getElementById("nameCardID").focus();
+
+    //create button for getting next question; hide for now
+    var getNextButton = document.getElementById("getNext");
+    getNextButton.style.display = "none";
+
+    // get random numbers for questions
+    getQuestionNums();
+
+    // push questions to page
+    renderQuestion();
+
+    // get three random numbers to pick random trivia questions from array
+    function getQuestionNums() {
+      for (i = 0; i < maxQuestions; i++) {
+        let rndmNum = Math.floor(Math.random()*10);
+        while (numArray.includes(rndmNum)) {
+          rndmNum = Math.floor(Math.random()*10);
+        };
+        numArray[i]=rndmNum;
+      };
+      console.log(numArray);
+      return numArray;
+    };
+
+    function enableButtons() {
+      document.getElementById("a").disabled = false;
+      document.getElementById("b").disabled = false;
+      document.getElementById("c").disabled = false;
+    }
+
+    function disableButtons() {
+      document.getElementById("a").disabled = true;
+      document.getElementById("b").disabled = true;
+      document.getElementById("c").disabled = true;
+    }
+
+    // display image, question, options
+    function renderQuestion() {
+      currentQuestion = numArray[questionNum];
+      console.log(`Current question: ${currentQuestion}`);
+      //disable button requesting next question and hide info at top
+      getNextButton.style.display = "none";
+      document.getElementById("quizStatus").style.display="none";
+      document.getElementById("userPrompt").style.display="none";
+      document.getElementById("backgroundInfo").style.display="none";
+
+      //show questions
+      document.getElementById("image").src=triviaQuestions[currentQuestion].image;
+      document.getElementById("image").alt=triviaQuestions[currentQuestion].imageName;
+      document.getElementById("q1").innerHTML=triviaQuestions[currentQuestion].question;
+      document.getElementById("a").innerHTML=triviaQuestions[currentQuestion].answer[0];
+      document.getElementById("b").innerHTML=triviaQuestions[currentQuestion].answer[1];
+      document.getElementById("c").innerHTML=triviaQuestions[currentQuestion].answer[2];
+      enableButtons();
+    };
+
+    //called on click of one of the answer options
+    function checkAnswer(userResponse) {
+      //reset button colors
+
+      correctAnswer = triviaQuestions[currentQuestion].correctAnswer;
+
+      console.log(`questionNum:${questionNum} Correct answer:${correctAnswer} User response:${userResponse}`)
+      if (userResponse==correctAnswer) {
+        //display text giving correct answer and more background info
+        document.getElementById("userPrompt").style.display="block";
+        document.getElementById("backgroundInfo").style.display="block";
+        document.getElementById("quizStatus").style.display="block";
+        document.getElementById("userPrompt").innerHTML="Congratulations! You got it right!";
+        document.getElementById("backgroundInfo").innerHTML=triviaQuestions[currentQuestion].context;
+
+        //highlight correct answer; disable buttons
+      /*  document.getElementById(userResponse).style.backgroundColor="#1d0d69";
+        document.getElementById(userResponse).style.color="white"; */
+        disableButtons();
+
+        numCorrect++;
+        displayQuizProgress();
+        if (questionNum < maxQuestions-1) {
+          //questionNum is an array counter, starting at 0
+          //display button to get next question; render question onclick
+          getNextButton.style.display = "block";
+          questionNum++;
+        } else {
+          document.getElementById("userPrompt").innerHTML="Congratulations! You finished!";
+          document.getElementById("quizStatus").style.display = "none";
+          document.getElementById("triviaAnswer").style.display = "none"
+          passed = true;
+        }
+      } else {
+        displayQuizProgress();
+        //coaching text and more background info
+        document.getElementById("userPrompt").style.display="block";
+        document.getElementById("userPrompt").innerHTML="Not quite. Try again.";
+      };
+    }
+
+    function displayQuizProgress() {
+      var status=`${numCorrect} out of ${maxQuestions} correct.`;
+      document.getElementById("quizStatus").innerHTML=status;
+    }
+
+    function getID() {
+      nameCardID=document.getElementById("nameCardID").value;
+      console.log(`namecardID:${nameCardID}`);
+    }
+  </script>
+
+// record success to blockchain
+
+  <!--external misc scripts and files -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../node_modules/web3/dist/web3.min.js"></script>
+  <script src="../node_modules/truffle-contract/dist/truffle-contract.js"></script>
+  <script src="app.js"></script>
+
+</html>
