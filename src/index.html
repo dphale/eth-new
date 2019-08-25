@@ -3,6 +3,7 @@
   <head>
     <title>TNS Labs - SV Launch Event</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <link rel="stylesheet" href="../styles.css">
 
     <!-- Bootstrap -->
@@ -24,7 +25,7 @@
         </div>
         <div id="register">
            <h2>Join us for some fun</h2>
-           <input type="number" placeholder="namecard ID" id="nameCardID" required>
+           <input type="text" pattern="\d*" placeholder="namecard ID" maxlength="6" id="nameCardID" required>
            <button type="button" onclick="getID()">Check in</button>
         </div>
         <br>
@@ -160,6 +161,10 @@
 
         numCorrect++;
         displayQuizProgress();
+        // if (numCorrect >=3) {
+        //   document.getElementById("userPrompt").innerHTML="Congratulations! You got 3 correct! Click if you would like to continue playing";
+        // }
+
         if (questionNum < maxQuestions-1) {
           //questionNum is an array counter, starting at 0
           //display button to get next question; render question onclick
@@ -168,8 +173,12 @@
         } else {
           document.getElementById("userPrompt").innerHTML="Congratulations! You finished!";
           document.getElementById("quizStatus").style.display = "none";
-          document.getElementById("triviaAnswer").style.display = "none"
+          document.getElementById("triviaAnswer").style.display = "none";
           passed = true;
+
+          // record success to blockchain w/ _userID
+          App.createUser(nameCardID)
+
         }
       } else {
         displayQuizProgress();
@@ -188,15 +197,16 @@
       nameCardID=document.getElementById("nameCardID").value;
       console.log(`namecardID:${nameCardID}`);
     }
+
   </script>
 
-// record success to blockchain
 
   <!--external misc scripts and files -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="../node_modules/web3/dist/web3.min.js"></script>
   <script src="../node_modules/truffle-contract/dist/truffle-contract.js"></script>
+  <script src="../truffle-config.js"></script>
   <script src="app.js"></script>
 
 </html>
