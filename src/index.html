@@ -4,7 +4,7 @@
     <title>TNS Labs - SV Launch Event</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -38,8 +38,7 @@
       <div class="container">
         <header>
           <h2>Learn More About TechnoServe</h2>
-          <p><span id="userPrompt"></span><span id="quizStatus"></span></p>
-          <p id="backgroundInfo"></p>
+          <span id="userPrompt"></span><span id="quizStatus"></span><br>
           <button type="button" class="button" onclick="renderQuestion()" id="getNext">Next Question</button>
         </header>
 
@@ -47,11 +46,14 @@
           <img id="image">
         </div>
 
-        <div class=triviaAnswer id=triviaAnswer>
-          <p id="q1"></p>
-          <button type="button" class="button" onclick="checkAnswer('a')" id="a">
-          <button type="button" class="button" onclick="checkAnswer('b')" id="b">
-          <button type="button" class="button" onclick="checkAnswer('c')" id="c">
+        <div class="triviaSection" id="triviaSection">
+          <p id="backgroundInfo"></p>
+          <div id=triviaQuestion>
+            <p id="q1"></p>
+            <button type="button" class="button" onclick="checkAnswer('a')" id="a">
+            <button type="button" class="button" onclick="checkAnswer('b')" id="b">
+            <button type="button" class="button" onclick="checkAnswer('c')" id="c">
+          </div>
         </div>
         <br>
       </div>
@@ -70,7 +72,7 @@
   </body>
 
   <!-- external js file with questions in "triviaQuestion array variable" -->
-  <script src="triviaQuestions.js"></script>
+  <script type="text/javascript" src="triviaQuestions.js"></script>
 
   <script>
 
@@ -78,15 +80,17 @@
     let questionNum = 0;  //note that questions start with 0
     let numCorrect = 0;
     let numArray = [];
-    let maxQuestions = 3;
+    let maxQuestions = 7;
     let passed = false;
 
     //focus on element to enter nameCardID tag
     document.getElementById("nameCardID").focus();
+    document.getElementById("section").style.display="none";
 
     //create button for getting next question; hide for now
     var getNextButton = document.getElementById("getNext");
     getNextButton.style.display = "none";
+    document.getElementById("triviaQuestion").style.display="none";
 
     // get random numbers for questions
     getQuestionNums();
@@ -107,17 +111,10 @@
       return numArray;
     };
 
-    function enableButtons() {
-      document.getElementById("a").disabled = false;
-      document.getElementById("b").disabled = false;
-      document.getElementById("c").disabled = false;
-    }
-
-    function disableButtons() {
-      document.getElementById("a").disabled = true;
-      document.getElementById("b").disabled = true;
-      document.getElementById("c").disabled = true;
-    }
+    function displayUserPrompt(displayMsg) {
+      document.getElementById("userPrompt").style.display="block";
+      document.getElementById("userPrompt").innerHTML=displayMsg
+    };
 
     // display image, question, options
     function renderQuestion() {
@@ -129,14 +126,17 @@
       document.getElementById("userPrompt").style.display="none";
       document.getElementById("backgroundInfo").style.display="none";
 
-      //show questions
+      //show image
+      document.getElementById("image").style.display="block";
       document.getElementById("image").src=triviaQuestions[currentQuestion].image;
       document.getElementById("image").alt=triviaQuestions[currentQuestion].imageName;
+
+      //show question and answer buttons
+      document.getElementById("triviaQuestion").style.display="block";
       document.getElementById("q1").innerHTML=triviaQuestions[currentQuestion].question;
       document.getElementById("a").innerHTML=triviaQuestions[currentQuestion].answer[0];
       document.getElementById("b").innerHTML=triviaQuestions[currentQuestion].answer[1];
       document.getElementById("c").innerHTML=triviaQuestions[currentQuestion].answer[2];
-      enableButtons();
     };
 
     //called on click of one of the answer options
@@ -146,59 +146,68 @@
       correctAnswer = triviaQuestions[currentQuestion].correctAnswer;
 
       console.log(`questionNum:${questionNum} Correct answer:${correctAnswer} User response:${userResponse}`)
+
+      // hide questions and show context
+      document.getElementById("backgroundInfo").innerHTML=triviaQuestions[currentQuestion].context;
+      document.getElementById("triviaQuestion").style.display="none";
+      document.getElementById("backgroundInfo").style.display="block";
+
       if (userResponse==correctAnswer) {
-        //display text giving correct answer and more background info
-        document.getElementById("userPrompt").style.display="block";
-        document.getElementById("backgroundInfo").style.display="block";
-        document.getElementById("quizStatus").style.display="block";
-        document.getElementById("userPrompt").innerHTML="Congratulations! You got it right!";
-        document.getElementById("backgroundInfo").innerHTML=triviaQuestions[currentQuestion].context;
-
-        //highlight correct answer; disable buttons
-      /*  document.getElementById(userResponse).style.backgroundColor="#1d0d69";
-        document.getElementById(userResponse).style.color="white"; */
-        disableButtons();
-
+        //increment number correct and show quiz progress
         numCorrect++;
+        console.log(`numCorrect: ${numCorrect}`);
         displayQuizProgress();
-        // if (numCorrect >=3) {
-        //   document.getElementById("userPrompt").innerHTML="Congratulations! You got 3 correct! Click if you would like to continue playing";
-        // }
+
+        if (numCorrect==3) {
+          passed = true;
+          App.createUser(nameCardID);
+        };
 
         if (questionNum < maxQuestions-1) {
           //questionNum is an array counter, starting at 0
-          //display button to get next question; render question onclick
+
+          // some questions remain; show next button and increment question number
           getNextButton.style.display = "block";
           questionNum++;
+          displayUserPrompt("Correct!");
+
         } else {
-          document.getElementById("userPrompt").innerHTML="Congratulations! You finished!";
-          document.getElementById("quizStatus").style.display = "none";
-          document.getElementById("triviaAnswer").style.display = "none";
-          passed = true;
-
-          // record success to blockchain w/ _userID
-          App.createUser(nameCardID)
-
+          if (passed = true) {
+            displayUserPrompt("Congratulations! You passed the TNS trivia challenge!");
+          } else {
+            displayUserPrompt("Thanks for playing!")
+          }
         }
       } else {
+        if (questionNum < maxQuestions-1) {
+          getNextButton.style.display = "block";
+          questionNum++;
+          displayUserPrompt("Not quite right. See below for the correct answer.");
+        } else {
+          if (passed = true) {
+            displayUserPrompt("You missed the last question, but you passed the TNS trivia challenge!");
+          } else {
+            displayUserPrompt("Thanks for playing!")
+          }
+        };
         displayQuizProgress();
-        //coaching text and more background info
-        document.getElementById("userPrompt").style.display="block";
-        document.getElementById("userPrompt").innerHTML="Not quite. Try again.";
-      };
-    }
+      }
+    };
 
     function displayQuizProgress() {
       var status=`${numCorrect} out of ${maxQuestions} correct.`;
+      document.getElementById("quizStatus").style.display="block";
       document.getElementById("quizStatus").innerHTML=status;
-    }
+    };
 
     function getID() {
+      document.getElementById("section").style.display="block";
       nameCardID=document.getElementById("nameCardID").value;
       console.log(`namecardID:${nameCardID}`);
-    }
+    };
 
   </script>
+
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
