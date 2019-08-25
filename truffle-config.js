@@ -3,9 +3,7 @@ module.exports = {
     development: {
       host: "127.0.0.1",
       port: 7545,
-      network_id: "*", // Match any network id
-      gasPrice: 100000000000,
-      gas: 6721975 // gas limit
+      network_id: "*" // Match any network id
     }
   },
   solc: {

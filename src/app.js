@@ -26,9 +26,9 @@ App = {
         // Request account access if needed
         await ethereum.enable()
         // Acccounts now exposed
-        web3.eth.sendTransaction({
+        web3.eth.sendTransaction({/*
           gas:100000
-        })
+        */})
       } catch (error) {
         // User denied account access...
       }
@@ -38,9 +38,9 @@ App = {
       App.web3Provider = web3.currentProvider
       window.web3 = new Web3(web3.currentProvider)
       // Acccounts always exposed
-      web3.eth.sendTransaction({
+      web3.eth.sendTransaction({/*
         gas:110000
-      })
+      */})
     }
     // Non-dapp browsers...
     else {
@@ -55,9 +55,9 @@ App = {
 
   loadContract: async () => {
     // Create a JavaScript version of the smart contract
-    const userList = await $.getJSON('../build/contracts/UserList.json')
+    const userList = await $.getJSON('UserList.json')
     App.contracts.UserList = TruffleContract(userList)
-    App.contracts.UserList.defaults({gasLimit:6721975})
+//    App.contracts.UserList.defaults({gasLimit:6721975})
     App.contracts.UserList.setProvider(App.web3Provider)
     // Hydrate the smart contract with values from the blockchain
     App.userList = await App.contracts.UserList.deployed()
