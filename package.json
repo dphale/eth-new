@@ -1,7 +1,7 @@
 {
   "name": "eth-new",
   "version": "1.0.0",
-  "description": "Blockchain Todo List Powered By Ethereum",
+  "description": "User list conf room demo powered by Ethereum",
   "main": "truffle-config.js",
   "directories": {
     "test": "test"
@@ -10,7 +10,7 @@
     "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && sexit 1"
   },
-  "author": "gregory@dappuniversity.com",
+  "author": "dhale@tns.org",
   "license": "ISC",
   "devDependencies": {
     "bootstrap": "4.1.3",

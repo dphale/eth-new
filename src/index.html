@@ -64,7 +64,7 @@
     <!-- // [START footer] -->
     <footer>
       <div class="container">
-        <p>add a footer later with launch date, location</p>
+        <p>footer with launch date, location</p>
       </div>
     </footer>
     <!-- // [END footer] -->
@@ -156,11 +156,10 @@
         //increment number correct and show quiz progress
         numCorrect++;
         console.log(`numCorrect: ${numCorrect}`);
-        displayQuizProgress();
 
         if (numCorrect==3) {
           passed = true;
-          App.createUser(nameCardID);
+          // App.createUser(nameCardID);
         };
 
         if (questionNum < maxQuestions-1) {
@@ -190,12 +189,13 @@
             displayUserPrompt("Thanks for playing!")
           }
         };
-        displayQuizProgress();
-      }
+      };
+
+      displayQuizProgress()
     };
 
     function displayQuizProgress() {
-      var status=`${numCorrect} out of ${maxQuestions} correct.`;
+      var status=`${numCorrect} out of ${maxQuestions} correct. ${maxQuestions-questionNum} questions remaining.`;
       document.getElementById("quizStatus").style.display="block";
       document.getElementById("quizStatus").innerHTML=status;
     };
