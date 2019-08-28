@@ -1,6 +1,10 @@
 .PHONY: build
 
-build:
+truffle:
+	truffle compile
+	truffle migrate
+
+build: truffle
 	mkdir -p dist/vendor
 	cp -r src/* dist/
 	cp build/contracts/* dist
