@@ -4,7 +4,7 @@ truffle:
 	truffle compile
 	truffle migrate
 
-build: truffle
+build:
 	mkdir -p dist/vendor
 	cp -r src/* dist/
 	cp build/contracts/* dist
