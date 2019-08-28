@@ -1,6 +1,7 @@
 .PHONY: build
 
 build:
-	mkdir -p dist
+	mkdir -p dist/vendor
 	cp -r src/* dist/
 	cp build/contracts/* dist
+	cp -r node_modules/* dist/vendor
