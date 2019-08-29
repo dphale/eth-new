@@ -8,8 +8,9 @@ import json
 app = Flask(__name__)
 
 class UserListController(object):
-    def __init__(self, ipc_file, contract_address, contract_json, address, keyfile, passwordfile):
+    def __init__(self, ipc_file, contract_address, contract_json, address, keyfile, passwordfile, explorer_format):
         self.address = Web3.toChecksumAddress(address)
+        self.explorer_format = explorer_format
 
         self.client = Web3(Web3.IPCProvider(ipc_file))
 
@@ -46,15 +47,23 @@ class UserListController(object):
         signed_tx = self.client.eth.account.signTransaction(tx, self.private_key)
         return self.client.eth.sendRawTransaction(signed_tx.rawTransaction)
 
+    def get_explorer_url(self, txid):
+        return self.explorer_format.format(tx=txid.hex())
+
+
 config = configparser.ConfigParser()
 config.read('config.ini')
 contracting = config['contracting']
-ulc = UserListController(contracting['IPC'], contracting['ContractAddress'], contracting['ContractJSON'], contracting['Address'], contracting['KeyFile'], contracting['PasswordFile'])
+ulc = UserListController(contracting['IPC'], contracting['ContractAddress'], contracting['ContractJSON'], contracting['Address'], contracting['KeyFile'], contracting['PasswordFile'], contracting['ExplorerFormat'])
 
 @app.route('/newuser', methods=['POST'])
 def create_user():
-    userid = request.json.get('UserID')
-    return ulc.create_user(userid)
+    try:
+        userid = request.json.get('UserID')
+        txid = ulc.create_user(userid)
+        return { "status": "Success", "transaction": ulc.get_explorer_url(txid) }
+    except Exception as e:
+        return { "status": "Failure", "reason": str(e) }
 
 if __name__ == "__main__":
     # This is a test creation invoked directly, this should be replaced with a web server
