@@ -47,4 +47,5 @@ if __name__ == "__main__":
     default = config['default']
     ulc = UserListController(default['IPC'], default['ContractAddress'], default['ContractJSON'], default['Address'], default['KeyFile'], default['PasswordFile'])
 
+    # This is a test creation invoked directly, this should be replaced with a web server
     ulc.create_user(999999)
