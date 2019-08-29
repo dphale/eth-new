@@ -1,7 +1,11 @@
 from web3 import Web3
 
+from flask import Flask, request
+
 import configparser
 import json
+
+app = Flask(__name__)
 
 class UserListController(object):
     def __init__(self, ipc_file, contract_address, contract_json, address, keyfile, passwordfile):
@@ -29,23 +33,30 @@ class UserListController(object):
             enc_key = kf.read()
             return self.client.eth.account.decrypt(enc_key, password)
 
-
-    def create_user(self, nameCardID):
-        tx_data = {
+    def _base_tx(self):
+        return {
             "nonce": self.client.eth.getTransactionCount(self.address),
             "gasPrice": self.client.eth.gasPrice,
             "gas": 100000,
         }
+
+    def create_user(self, nameCardID):
+        tx_data = self._base_tx()
         tx = self.contract.functions.createUser(nameCardID).buildTransaction(tx_data)
         signed_tx = self.client.eth.account.signTransaction(tx, self.private_key)
-        res = self.client.eth.sendRawTransaction(signed_tx.rawTransaction)
+        return self.client.eth.sendRawTransaction(signed_tx.rawTransaction)
 
+config = configparser.ConfigParser()
+config.read('config.ini')
+contracting = config['contracting']
+ulc = UserListController(contracting['IPC'], contracting['ContractAddress'], contracting['ContractJSON'], contracting['Address'], contracting['KeyFile'], contracting['PasswordFile'])
+
+@app.route('/newuser', methods=['POST'])
+def create_user():
+    userid = request.json.get('UserID')
+    return ulc.create_user(userid)
 
 if __name__ == "__main__":
-    config = configparser.ConfigParser()
-    config.read('config.ini')
-    default = config['default']
-    ulc = UserListController(default['IPC'], default['ContractAddress'], default['ContractJSON'], default['Address'], default['KeyFile'], default['PasswordFile'])
-
     # This is a test creation invoked directly, this should be replaced with a web server
-    ulc.create_user(999999)
+    #ulc.create_user(999999)
+    app.run(port=80, host='0.0.0.0', debug=True)
