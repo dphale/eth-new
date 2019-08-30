@@ -10,4 +10,4 @@ build:
 	docker-compose build
 
 run: build deps
-	docker-compose up --force-recreate
+	docker-compose up -d --force-recreate
