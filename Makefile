@@ -1,11 +1,13 @@
-.PHONY: build
+.PHONY: deps build run
+
+deps:
+	mkdir -p /rinkeby/chaindata/keystore
+	mkdir -p /rinkeby/passwords
+	cp keystore/wallets/* /rinkeby/chaindata/keystore
+	cp keystore/passwords/* /rinkeby/passwords/
 
 build:
-	mkdir -p dist/vendor
-	cp -r src/* dist/
-	cp build/contracts/* dist
-	cp -r node_modules/* dist/vendor
-
-start:
 	docker-compose build
+
+run: build deps
 	docker-compose up --force-recreate
