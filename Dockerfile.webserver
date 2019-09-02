@@ -1,0 +1,11 @@
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y python3 python3-pip python python-pip
+
+RUN pip3 install web3 flask gunicorn
+
+COPY server/app.py .
+COPY server/config.ini .
+COPY build/contracts/UserList.json .
+
+CMD gunicorn -w 4 -b 0.0.0.0:80 app:app
