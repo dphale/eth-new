@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="../styles.css">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-
+      </head>
   <body>
 
     <!-- // [START headline] -->
@@ -21,12 +19,11 @@
         </header>
         <div id="blurb">
           <p>TNS Labs will identify, test, and implement technology to scale impact in the fight against poverty, leveraging TechnoServe's on-the-ground experience and strategic market-based approach</p>
-          <p>Answer some trivia questions about TechnoServe's work, and we will have a gift for you when you leave!</p>
+          <p id="giftblurb">Answer some trivia questions about TechnoServe's work, and we will have a gift for you when you leave!</p>
         </div>
         <div id="register">
            <h2>Join us for some fun</h2>
-           <input type="text" pattern="\d*" placeholder="namecard ID" maxlength="6" id="nameCardID" required>
-           <button type="button" onclick="getID()">Check in</button>
+           <button type="button" onclick="getID()">Get started!</button>
         </div>
         <br>
       </div>
@@ -38,8 +35,11 @@
       <div class="container">
         <header>
           <h2>Learn More About TechnoServe</h2>
-          <span id="userPrompt"></span><span id="quizStatus"></span><br>
+          <p id="userPrompt"></p>
+          <p id="backgroundInfo"></p>
+          <p id="quizStatus"></p>
           <button type="button" class="button" onclick="renderQuestion()" id="getNext">Next Question</button>
+          <br>
         </header>
 
         <div id="imageSection">
@@ -47,7 +47,6 @@
         </div>
 
         <div class="triviaSection" id="triviaSection">
-          <p id="backgroundInfo"></p>
           <div id=triviaQuestion>
             <p id="q1"></p>
             <button type="button" class="button" onclick="checkAnswer('a')" id="a">
@@ -64,7 +63,7 @@
     <!-- // [START footer] -->
     <footer>
       <div class="container">
-        <p>footer with launch date, location</p>
+        <p>TNS Labs Launch Event, Google Community Space, San Francisco</p>
       </div>
     </footer>
     <!-- // [END footer] -->
@@ -76,6 +75,9 @@
 
   <script>
 
+    //suppress metamask error
+    ethereum.autoRefreshOnNetworkChange = false;
+
     var userResponse, currentQuestion, correctAnswer, nameCardID;
     let questionNum = 0;  //note that questions start with 0
     let numCorrect = 0;
@@ -83,22 +85,12 @@
     let maxQuestions = 7;
     let passed = false;
 
-    //focus on element to enter nameCardID tag
-    document.getElementById("nameCardID").focus();
-    document.getElementById("section").style.display="none";
-
     //create button for getting next question; hide for now
     var getNextButton = document.getElementById("getNext");
     getNextButton.style.display = "none";
     document.getElementById("triviaQuestion").style.display="none";
 
-    // get random numbers for questions
-    getQuestionNums();
-
-    // push questions to page
-    renderQuestion();
-
-    // get three random numbers to pick random trivia questions from array
+    // get random numbers to pick random trivia questions from array
     function getQuestionNums() {
       for (i = 0; i < maxQuestions; i++) {
         let rndmNum = Math.floor(Math.random()*10);
@@ -107,9 +99,31 @@
         };
         numArray[i]=rndmNum;
       };
-      console.log(numArray);
       return numArray;
     };
+
+    function getID() {
+      document.getElementById("section").style.display="block";
+      do {
+        var nameCardID = prompt("Please enter the 5-digit number on your name card", "Name Card ID")
+        if (nameCardID.match(/(^\d{5}$)/)) {
+          invalidNameCardID = false;
+          getQuestionNums();              // get random numbers for questions
+          renderQuestion();               // push questions to page
+
+        } else {
+          window.alert("Please enter the 5-digit number on your name card");
+          invalidNameCardID = true;
+        }
+      }
+      while (invalidNameCardID);
+
+      document.getElementById("register").style.display="none";
+      document.getElementById("giftblurb").style.display="none";
+    };
+
+    //don't show trivia content yet
+    document.getElementById("section").style.display="none";
 
     function displayUserPrompt(displayMsg) {
       document.getElementById("userPrompt").style.display="block";
@@ -119,10 +133,11 @@
     // display image, question, options
     function renderQuestion() {
       currentQuestion = numArray[questionNum];
-      console.log(`Current question: ${currentQuestion}`);
-      //disable button requesting next question and hide info at top
+      displayQuizProgress()
+
+      //disable button requesting next question; remove user prompt and background info
       getNextButton.style.display = "none";
-      document.getElementById("quizStatus").style.display="none";
+
       document.getElementById("userPrompt").style.display="none";
       document.getElementById("backgroundInfo").style.display="none";
 
@@ -141,11 +156,10 @@
 
     //called on click of one of the answer options
     function checkAnswer(userResponse) {
-      //reset button colors
-
       correctAnswer = triviaQuestions[currentQuestion].correctAnswer;
 
-      console.log(`questionNum:${questionNum} Correct answer:${correctAnswer} User response:${userResponse}`)
+      //hide quiz status
+      document.getElementById("quizStatus").style.display="none";
 
       // hide questions and show context
       document.getElementById("backgroundInfo").innerHTML=triviaQuestions[currentQuestion].context;
@@ -155,11 +169,11 @@
       if (userResponse==correctAnswer) {
         //increment number correct and show quiz progress
         numCorrect++;
-        console.log(`numCorrect: ${numCorrect}`);
 
         if (numCorrect==3) {
           passed = true;
           // App.createUser(nameCardID);
+          window.alert("Note - nameCardID pushed to Ethereum in backend");
         };
 
         if (questionNum < maxQuestions-1) {
@@ -167,7 +181,6 @@
 
           // some questions remain; show next button and increment question number
           getNextButton.style.display = "block";
-          questionNum++;
           displayUserPrompt("Correct!");
 
         } else {
@@ -180,8 +193,7 @@
       } else {
         if (questionNum < maxQuestions-1) {
           getNextButton.style.display = "block";
-          questionNum++;
-          displayUserPrompt("Not quite right. See below for the correct answer.");
+          displayUserPrompt("Not quite right.");
         } else {
           if (passed = true) {
             displayUserPrompt("You missed the last question, but you passed the TNS trivia challenge!");
@@ -190,20 +202,16 @@
           }
         };
       };
+      questionNum++;
 
-      displayQuizProgress()
     };
 
     function displayQuizProgress() {
-      var status=`${numCorrect} out of ${maxQuestions} correct. ${maxQuestions-questionNum} questions remaining.`;
-      document.getElementById("quizStatus").style.display="block";
-      document.getElementById("quizStatus").innerHTML=status;
-    };
-
-    function getID() {
-      document.getElementById("section").style.display="block";
-      nameCardID=document.getElementById("nameCardID").value;
-      console.log(`namecardID:${nameCardID}`);
+      if (questionNum > 0) {
+        var status=`${numCorrect} out of 7 questions correct. ${maxQuestions-questionNum} question(s) remaining.`;
+        document.getElementById("quizStatus").style.display="block";
+        document.getElementById("quizStatus").innerHTML=status;
+      }
     };
 
   </script>

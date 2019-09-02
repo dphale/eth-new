@@ -6,7 +6,7 @@ body {
 #headline {
   padding: 0.8em;
   color: white;
-  font-family: Roboto, helvetica, arial, sans-serif;
+  font-family: helvetica, arial, sans-serif;
   background-color: black;
   background-image: url(images/hero-Zimbabwe-coffee-Tanya.jpg);
   background-size: cover;
@@ -25,15 +25,20 @@ body {
   margin-top: 5px;
 }
 
-#headline #blurb {
+#blurb {
+  background-color: rgba(128, 128, 128, 0.6);
+  color: white;
   font-weight: 300;
   font-size: 18px;
+  padding: 1em;
+  margin: 10px;
 }
 
 #headline #register {
   background-color: #00b1ac;
   background-color: rgba(57,177, 164, 0.7);
   padding: 1em;
+  margin: 10px;
 }
 
 #headline #register h2 {
@@ -52,7 +57,8 @@ body {
 .triviaSection {
   font-size: 18px;
   font-weight: 200;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #register button[type=button] {
@@ -60,18 +66,6 @@ body {
   width: 90%;
   color: white;
   margin-top: 10px;
-  padding: 5px;
-  border: none;
-  box-sizing: border-box;
-  font-size: 18px;
-}
-
-#register input[type=text] {
-  background-color: white;
-  width: 90%;
-  color: black;
-  margin-top: 10px;
-  text-align: center;
   padding: 5px;
   border: none;
   box-sizing: border-box;
@@ -87,13 +81,17 @@ body {
   width: 100%;
   color: gray;
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   padding: 2px;
   border-color: grey;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 18px;
 }
 
+.button:hover {
+  background-color: rgba(29,13,105, 0.7);
+  color: white;
+}
 
 #section {
   box-sizing: border-box;
@@ -119,6 +117,18 @@ footer {
   padding-top: 10px;
 }
 
+img {
+  width: 100%;
+  padding: 20px;
+  height:auto;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#triviaQuestion {
+  padding: 0px;
+}
+
 @media screen and (min-width: 600px) {
   .container {
     margin: auto;
@@ -132,10 +142,9 @@ footer {
   #headline #blurb {
     float: left;
     font-weight: 200;
-    width: 50%;
+    width: 45%;
     font-size: 18px;
     box-sizing: border-box;
-    padding-right: 10px;
   }
 
   #headline br {
@@ -144,8 +153,7 @@ footer {
 
   #headline #register {
     float: right;
-    padding: 20px;
-    width: 50%;
+    width: 45%;
     box-sizing: border-box;
     font-weight: 300;
   }
@@ -159,23 +167,17 @@ footer {
     clear:  both;
   }
 
-  #imageSection {
+  img {
     float:left;
-    width: 50%;
+    width: 45%;
     padding: 20px 5%;
-  }
-
-  #image {
-    width: 100%;
-    height:auto;
-    box-sizing: border-box;
-    box-shadow: black 0px 0px 5px;
   }
 
   .triviaSection  {
     float: right;
-    padding: 20px 5%;
-    width: 50%;
+    padding-left: 20px 5%;
+    padding-right: 20px 5%;
+    width: 45%;
     box-sizing: border-box;
     font-weight: 300;
   }
