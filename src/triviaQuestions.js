@@ -21,7 +21,7 @@ var triviaQuestions = [
     imageName : "Drone",
     answer : ["SMS", "Drones", "Distributed Applications"],
     correctAnswer : "b",
-    context : "TechnoServe has piloted drone technology in Mozambique and Uganda, and plans to use satelites and drones to decrease the cost of collecting farm yeild data.",
+    context : "TechnoServe has piloted drone technology in Mozambique and Uganda, and plans to use satelites and drones to decrease the cost of collecting farm yield data.",
   },
   {
     question : "In how many countries does TechnoServe operate?",
