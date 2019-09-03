@@ -70,4 +70,4 @@ def create_user():
 if __name__ == "__main__":
     # This is a test creation invoked directly, this should be replaced with a web server
     #ulc.create_user(999999)
-    app.run(port=80, host='0.0.0.0', debug=True)
+    app.run(port=443, host='0.0.0.0', debug=True)

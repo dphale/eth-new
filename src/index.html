@@ -105,7 +105,7 @@
     function getID() {
       document.getElementById("section").style.display="block";
       do {
-        var nameCardID = prompt("Please enter the 5-digit number on your name card", "")
+        nameCardID = prompt("Please enter the 5-digit number on your name card", "")
         if (nameCardID.match(/(^\d{5}$)/)) {
           invalidNameCardID = false;
           getQuestionNums();              // get random numbers for questions
@@ -173,7 +173,7 @@
         if (numCorrect==3) {
           passed = true;
           const params = {
-            UserID: nameCardID.value
+            UserID: nameCardID
           }
 
           var xhr = new XMLHttpRequest();
@@ -187,7 +187,7 @@
           }
 
           xhr.send(JSON.stringify(params));
-          console.log(`POST nameCardID:${nameCardID.value} to ethereum complete`);
+          console.log(`POST nameCardID:${nameCardID} to ethereum complete`);
 
           // App.createUser(nameCardID);
         };
