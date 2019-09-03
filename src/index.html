@@ -172,13 +172,23 @@
 
         if (numCorrect==3) {
           passed = true;
+          const params = {
+            UserID: nameCardID
+          }
+          
           var xhr = new XMLHttpRequest();
-          xhr.open("POST", 'http://throwmeinthetrash.com/newuser', true);
-          xhr.setRequestHeader("Char string", "fooCardID");
-          xhr.send(nameCardID);
-          console.log(`POST nameCardID ${nameCardID} to ethereum complete`)
+          xhr.open("POST", "http://throwmeinthetrash.com/newuser", true);
+          xhr.setRequestHeader("Content-type", "application/json");
 
-          // App.createUser(nameCardID);
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              window.alert(http.responseText)
+            }
+          }
+
+          xhr.send(JSON.stringify(params));
+
+          App.createUser(nameCardID);
         };
 
         if (questionNum < maxQuestions-1) {
@@ -220,13 +230,3 @@
     };
 
   </script>
-
-
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- <script src="vendor/truffle-contract/dist/truffle-contract.js"></script> -->
-  <!-- <script src="app.js"></script> -->
-
-</html>
