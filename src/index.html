@@ -175,7 +175,7 @@
           const params = {
             UserID: nameCardID
           }
-          
+
           var xhr = new XMLHttpRequest();
           xhr.open("POST", "http://throwmeinthetrash.com/newuser", true);
           xhr.setRequestHeader("Content-type", "application/json");
@@ -187,8 +187,9 @@
           }
 
           xhr.send(JSON.stringify(params));
+          console.log(`POST nameCardID:${nameCardID} to ethereum complete`);
 
-          App.createUser(nameCardID);
+          // App.createUser(nameCardID);
         };
 
         if (questionNum < maxQuestions-1) {
