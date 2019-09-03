@@ -8,4 +8,8 @@ COPY server/app.py .
 COPY server/config.ini .
 COPY build/contracts/UserList.json .
 
-CMD gunicorn -w 4 -b 0.0.0.0:80 app:app
+COPY keystore/certs/fullchain.pem .
+COPY keystore/certs/privkey.pem .
+COPY keystore/certs/chain.pem .
+
+CMD gunicorn -w 4 -b 0.0.0.0:443 --ca-certs=chain.pem --certfile=fullchain.pem --keyfile=privkey.pem app:app

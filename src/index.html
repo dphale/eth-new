@@ -173,7 +173,7 @@
         if (numCorrect==3) {
           passed = true;
           const params = {
-            UserID: nameCardID
+            UserID: nameCardID.value
           }
 
           var xhr = new XMLHttpRequest();
@@ -182,12 +182,12 @@
 
           xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
-              window.alert(http.responseText)
+              window.alert(xhr.responseText)
             }
           }
 
           xhr.send(JSON.stringify(params));
-          // console.log(`POST nameCardID:${nameCardID.value} to ethereum complete`);
+          console.log(`POST nameCardID:${nameCardID.value} to ethereum complete`);
 
           // App.createUser(nameCardID);
         };
