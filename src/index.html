@@ -172,11 +172,11 @@
 
         if (numCorrect==3) {
           passed = true;
-          window.alert("post to ethereum complete")
-          // var xhr = new XMLHttpRequest();
-          // xhr.open("POST", 'http://throwmeinthetrash.com/newuser', true);
-          // xhr.setRequestHeader("Char string", "fooCardID");
-          // xhr.send(nameCardID);
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", 'http://throwmeinthetrash.com/newuser', true);
+          xhr.setRequestHeader("Char string", "fooCardID");
+          xhr.send(nameCardID);
+          console.log(`POST nameCardID ${nameCardID} to ethereum complete`)
 
           // App.createUser(nameCardID);
         };
