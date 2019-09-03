@@ -105,7 +105,7 @@
     function getID() {
       document.getElementById("section").style.display="block";
       do {
-        var nameCardID = prompt("Please enter the 5-digit number on your name card", "Name Card ID")
+        var nameCardID = prompt("Please enter the 5-digit number on your name card", "")
         if (nameCardID.match(/(^\d{5}$)/)) {
           invalidNameCardID = false;
           getQuestionNums();              // get random numbers for questions
@@ -177,7 +177,7 @@
           }
 
           var xhr = new XMLHttpRequest();
-          xhr.open("POST", "http://throwmeinthetrash.com/newuser", true);
+          xhr.open("POST", "https://labs.colinaws.com/newuser", true);
           xhr.setRequestHeader("Content-type", "application/json");
 
           xhr.onreadystatechange = function() {
