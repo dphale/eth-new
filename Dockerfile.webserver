@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y python3 python3-pip python python-pip
 
-RUN pip3 install web3 flask gunicorn
+RUN pip3 install web3 flask gunicorn flask-cors
 
 COPY server/app.py .
 COPY server/config.ini .

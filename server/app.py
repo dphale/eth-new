@@ -1,11 +1,13 @@
 from web3 import Web3
 
 from flask import Flask, request
+from flask_cors import CORS
 
 import configparser
 import json
 
 app = Flask(__name__)
+CORS(app)
 
 class UserListController(object):
     def __init__(self, ipc_file, contract_address, contract_json, address, keyfile, passwordfile, explorer_format):
