@@ -144,6 +144,7 @@
       //disable button requesting next question; remove user prompt and background info
       getNextButton.style.display = "none";
       document.getElementById("userPrompt").style.display="none";
+      document.getElementById("quizStatus").style.display="none";
       document.getElementById("backgroundInfo").style.display="none";
 
       //move page to trivia section on page load
@@ -170,7 +171,6 @@
       document.getElementById('triviaSectionTitle').scrollIntoView(true);
 
       //hide quiz status and trivia questions; show background info
-      document.getElementById("quizStatus").style.display="none";
       document.getElementById("triviaQuestion").style.display="none";
       document.getElementById("backgroundInfo").style.display="block";
 
@@ -233,7 +233,7 @@
 
     function endQuiz() {
       displayQuizProgress();
-      let thankYouMsg = "Thank you for playing, and THANK YOU for your support of TechnoServe.";
+      let thankYouMsg = "Thank you for learning more about what we do, and THANK YOU for your support of TechnoServe.";
       document.getElementById("backgroundInfo").innerHTML=thankYouMsg;
 
     }
