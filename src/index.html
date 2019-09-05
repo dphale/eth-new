@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>TNS Labs - SV Launch Event</title>
+    <title>TechnoServe Labs - SV Launch Event</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <link rel="stylesheet" href="../styles.css">
@@ -14,16 +14,20 @@
     <div id="headline">
       <div class="container">
         <header>
-          <h1>TNS Labs</h1>
+          <h1>TechnoServe Labs</h1>
           <h2>SF Launch Event</h2>
         </header>
         <div id="blurb">
-          <p>TNS Labs will identify, test, and implement technology to scale impact in the fight against poverty, leveraging TechnoServe's on-the-ground experience and strategic market-based approach</p>
-          <p id="giftblurb">Answer some trivia questions about TechnoServe's work, and we will have a gift for you when you leave!</p>
+          <p>Join us in harnessing technology in the fight against global poverty.</p>
+          <div id="giftblurb">
+            <p> Explore the room to learn how TechnoServe's business approach is transforming
+              lives in the developing world - and how technology will expand this impact to millons more.</p>
+            <p>Then test your knowledge with the questions below to receive a special gift.</p>
+          </div>
         </div>
         <div id="register">
-           <h2>Join us for some fun</h2>
-           <button type="button" onclick="getID()">Get started!</button>
+           <!-- <h2>Join us for some fun</h2> -->
+           <button type="button" onclick="getID()">Let's go!</button>
         </div>
         <br>
       </div>
@@ -34,10 +38,10 @@
     <div id="section">
       <div class="container">
         <header>
-          <h2>Learn More About TechnoServe</h2>
+          <h2 id="triviaSectionTitle">Learn More About TechnoServe</h2>
           <p id="userPrompt"></p>
-          <p id="backgroundInfo"></p>
           <p id="quizStatus"></p>
+          <p id="backgroundInfo"></p>
           <button type="button" class="button" onclick="renderQuestion()" id="getNext">Next Question</button>
           <br>
         </header>
@@ -63,7 +67,8 @@
     <!-- // [START footer] -->
     <footer>
       <div class="container">
-        <p>TNS Labs Launch Event, Google Community Space, San Francisco</p>
+        <p>TechnoServe Labs Launch Event</p>
+        <p>Google Community Space, San Francisco</p>
       </div>
     </footer>
     <!-- // [END footer] -->
@@ -103,13 +108,15 @@
     };
 
     function getID() {
-      document.getElementById("section").style.display="block";
       do {
         nameCardID = prompt("Please enter the 5-digit number on your name card", "")
         if (nameCardID.match(/(^\d{5}$)/)) {
           invalidNameCardID = false;
-          getQuestionNums();              // get random numbers for questions
-          renderQuestion();               // push questions to page
+
+          // rendor question section, get random numbers for questions and push questions to page
+          document.getElementById("section").style.display="block";
+          getQuestionNums();
+          renderQuestion();
 
         } else {
           window.alert("Please enter the 5-digit number on your name card");
@@ -133,13 +140,14 @@
     // display image, question, options
     function renderQuestion() {
       currentQuestion = numArray[questionNum];
-      displayQuizProgress()
 
       //disable button requesting next question; remove user prompt and background info
       getNextButton.style.display = "none";
-
       document.getElementById("userPrompt").style.display="none";
       document.getElementById("backgroundInfo").style.display="none";
+
+      //move page to trivia section on page load
+      document.getElementById('triviaSectionTitle').scrollIntoView(true);
 
       //show image
       document.getElementById("image").style.display="block";
@@ -158,11 +166,11 @@
     function checkAnswer(userResponse) {
       correctAnswer = triviaQuestions[currentQuestion].correctAnswer;
 
-      //hide quiz status
-      document.getElementById("quizStatus").style.display="none";
+      //move page to trivia section on page load
+      document.getElementById('triviaSectionTitle').scrollIntoView(true);
 
-      // hide questions and show context
-      document.getElementById("backgroundInfo").innerHTML=triviaQuestions[currentQuestion].context;
+      //hide quiz status and trivia questions; show background info
+      document.getElementById("quizStatus").style.display="none";
       document.getElementById("triviaQuestion").style.display="none";
       document.getElementById("backgroundInfo").style.display="block";
 
@@ -195,36 +203,49 @@
         if (questionNum < maxQuestions-1) {
           //questionNum is an array counter, starting at 0
 
+          displayQuizProgress();
           // some questions remain; show next button and increment question number
           getNextButton.style.display = "block";
           displayUserPrompt("Correct!");
+          document.getElementById("backgroundInfo").innerHTML=triviaQuestions[currentQuestion].context;
 
         } else {
-          if (passed == true) {
-            displayUserPrompt("Congratulations! You passed the TNS trivia challenge!");
-          } else {
-            displayUserPrompt("Thanks for playing!")
-          }
+          displayUserPrompt("You got the last question right!");
+          endQuiz()
         }
       } else {
         if (questionNum < maxQuestions-1) {
+
+          displayQuizProgress();
+
           getNextButton.style.display = "block";
           displayUserPrompt("Not quite right.");
+          document.getElementById("backgroundInfo").innerHTML=triviaQuestions[currentQuestion].context;
+
         } else {
-          if (passed == true) {
-            displayUserPrompt("You missed the last question, but you passed the TNS trivia challenge!");
-          } else {
-            displayUserPrompt("Thanks for playing!")
-          }
+          displayUserPrompt("Sorry - you missed the last question.");
+          endQuiz()
         };
       };
       questionNum++;
-
+      console.log(`from checkAnswer - questionNum:${questionNum} maxQuestions:${maxQuestions} numCorrect:${numCorrect}`)
     };
 
+    function endQuiz() {
+      displayQuizProgress();
+      let thankYouMsg = "Thank you for playing, and THANK YOU for your support of TechnoServe.";
+      document.getElementById("backgroundInfo").innerHTML=thankYouMsg;
+
+    }
+
     function displayQuizProgress() {
-      if (questionNum > 0) {
+      console.log(`from displayQuizProgress - questionNum:${questionNum} maxQuestions:${maxQuestions} numCorrect:${numCorrect}`)
+      if (questionNum < maxQuestions-1) {
         var status=`${numCorrect} out of 7 questions correct. ${maxQuestions-questionNum} question(s) remaining.`;
+      } else {
+        var status=`You had ${numCorrect} out of 7 questions correct.`;
+      }
+      if (questionNum > 0) {
         document.getElementById("quizStatus").style.display="block";
         document.getElementById("quizStatus").innerHTML=status;
       }

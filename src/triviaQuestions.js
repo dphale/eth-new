@@ -1,15 +1,15 @@
 var triviaQuestions = [
   {
     question : "How many farmers grow coffee globally?",
-    image : "/images/small_coffee_growers.jpg",
+    image : "/images/small_coffee_growers_small.jpg",
     imageName :"Coffee growers",
-    answer : ["3 million","10-12 million","25 million"],
+    answer : ["3 million","12 million","25 million"],
     correctAnswer : "b",
-    context : "The global coffee market is the second largest globally traded commodity after oil. The value of the global coffee market is over $20B USD, yet 90% of coffee farmers earn less than $5/day.",
+    context : "The global coffee market is the second largest globally traded commodity after oil. The value of the global coffee market is over $20B USD, yet 80% of small holder farmers earn less than $2/day.",
   },
   {
     question : "In how many countries does TechnoServe have entrepreneurship training programs?",
-    image : "/images/entrepreneurship_training.jpg",
+    image : "/images/entrepreneurship_training_small.jpg",
     imageName : "Entrepreneurship training",
     answer : ["13","19","24"],
     correctAnswer : "c",
@@ -25,7 +25,7 @@ var triviaQuestions = [
   },
   {
     question : "In how many countries does TechnoServe operate?",
-    image : "/images/women_entrepreneurs.jpg",
+    image : "/images/women_entrepreneurs_small.jpg",
     imageName : "Women entrepreneur",
     answer : ["17", "29", "48"],
     correctAnswer : "b",
@@ -33,7 +33,7 @@ var triviaQuestions = [
   },
   {
     question : "What are potential benefits of using blockchain to improve traceability in the cashew supply chain?",
-    image : "/images/cashew_processing.jpg",
+    image : "/images/cashew_processing_small.jpg",
     imageName : "Cashew processing",
     answer : ["Transparency and tax revenue", " Farmer incomes", "Transparency, tax revenue, and farmer incomes"],
     correctAnswer : "c",
@@ -41,19 +41,19 @@ var triviaQuestions = [
   },
   {
     question : "What technology can be used to implement smart contracts and improve supply chain transparency in low trust environments?",
-    image : "/images/blockchain_smart_contracts.jpg",
+    image : "/images/blockchain_smart_contracts_small.jpg",
     imageName : "Coffee wet mill with smartphones",
     answer : ["Blockchain", "Mobile Money", "Remote Sensing"],
     correctAnswer : "a",
     context : "With better price and supply chain data, buyers can make better decisions that can increase prices for smallholder farmers. ",
   },
   {
-    question : "What percent of coffee farmers has TechnoServed trained with better agronomy practices to improve their incomes?",
-    image : "/images/drone_small.jpg",
+    question : "How many coffee farmers has TechnoServed trained with better agronomy practices to improve their incomes?",
+    image : "/images/small_coffee_growers_small.jpg",
     imageName : "Drone",
-    answer : ["3 percent", "5 percent", "6 percent"],
+    answer : ["200,000", "400,000", "6 million"],
     correctAnswer : "c",
-    context : "TechnoServe has trained almost 6% of small coffee farmers in the world, increasing their incomes by 30-50%.",
+    context : "TechnoServe has trained 400,000 small coffee farmers, increasing their incomes by 30-50%.",
   },
   {
     question : "What percentage of the entrepreneurs TechnoServe works with are women?",
@@ -61,7 +61,7 @@ var triviaQuestions = [
     imageName : "Duka owner",
     answer : ["39%", "45%", "58%"],
     correctAnswer : "c",
-    context : "TechnoServe works to achieve at least 40% participation of women in its entrepreneurship and agricultural training programs.",
+    context : "TechnoServe proactively engages women in all of its training programs. 58% of participants in its entrepreneurship programs were women.",
   },
   {
     question : "What technology can be used to classify aerial images as a cost-effective way to identify thousands of farmers who need agronomic training?",
@@ -73,7 +73,7 @@ var triviaQuestions = [
   },
   {
     question : "What technology is TechnoServe using to scale up entrepreneurship training programs?",
-    image : "/images/distance_learning.jpg",
+    image : "/images/distance_learning_small.jpg",
     imageName : "Man at computer",
     answer : ["Distance Learning", "Remote Sensing", "Blockchain"],
     correctAnswer : "a",

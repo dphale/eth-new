@@ -29,8 +29,8 @@ body {
   background-color: rgba(128, 128, 128, 0.6);
   color: white;
   font-weight: 300;
-  font-size: 18px;
-  padding: 1em;
+  font-size: 20px;
+  padding: 0.5em;
   margin: 10px;
 }
 
@@ -41,11 +41,11 @@ body {
   margin: 10px;
 }
 
-#headline #register h2 {
+/* #headline #register h2 {
   font-weight: 100;
   padding: 0;
   margin: 0;
-}
+} */
 
 #headline label {
   font-size: 1em;
@@ -65,11 +65,12 @@ body {
   background-color: rgba(29,13,105, 0.85);
   width: 90%;
   color: white;
-  margin-top: 10px;
-  padding: 5px;
+  margin: 10px;
+  padding: 10px;
   border: none;
   box-sizing: border-box;
-  font-size: 18px;
+  text-align: center;
+  font-size: 24px;
 }
 
 #getNext {
@@ -82,10 +83,10 @@ body {
   color: gray;
   margin-top: 5px;
   margin-bottom: 10px;
-  padding: 2px;
+  padding: 5px;
   border-color: grey;
   box-sizing: border-box;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .button:hover {
@@ -99,7 +100,7 @@ body {
   background-color: white;
   font-family: Roboto, sans-serif;
   font-weight: 100;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 #section h2 {
@@ -108,13 +109,13 @@ body {
 
 footer {
   font-family: Roboto, sans-serif;
-  font-weight: 300;
+  font-weight: 200;
   text-align: center;
   background-color: #1d0d69;
   background-color: rgba(29,13,105, 0.75);
   color: white;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
 img {
@@ -143,7 +144,7 @@ img {
     float: left;
     font-weight: 200;
     width: 45%;
-    font-size: 18px;
+    font-size: 20px;
     box-sizing: border-box;
   }
 
