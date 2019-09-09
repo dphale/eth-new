@@ -241,7 +241,7 @@
     function displayQuizProgress() {
       console.log(`from displayQuizProgress - questionNum:${questionNum} maxQuestions:${maxQuestions} numCorrect:${numCorrect}`)
       if (questionNum < maxQuestions-1) {
-        var status=`${numCorrect} out of 7 questions correct. ${maxQuestions-questionNum} question(s) remaining.`;
+        var status=`${numCorrect} out of 7 questions correct. ${maxQuestions-questionNum-1} question(s) remaining.`;
       } else {
         var status=`You had ${numCorrect} out of 7 questions correct.`;
       }
