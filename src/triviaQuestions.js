@@ -17,11 +17,11 @@ var triviaQuestions = [
   },
   {
     question : "What is one solution for 'remote sensing'?",
-    image : "/images/drone_small.jpg",
-    imageName : "Drone",
+    image : "/images/remote_sensing_small.jpg",
+    imageName : "Aerial photo",
     answer : ["SMS", "Drones", "Distributed Applications"],
     correctAnswer : "b",
-    context : "TechnoServe has piloted drone technology in Mozambique and Uganda, and plans to use satelites and drones to decrease the cost of collecting farm yield data.",
+    context : "TechnoServe has piloted drone technology in Mozambique and Uganda, and plans to use satellites and drones to decrease the cost of collecting farm yield data.",
   },
   {
     question : "In how many countries does TechnoServe operate?",
@@ -65,8 +65,8 @@ var triviaQuestions = [
   },
   {
     question : "What technology can be used to classify aerial images as a cost-effective way to identify thousands of farmers who need agronomic training?",
-    image : "/images/remote_sensing_small.jpg",
-    imageName : "Aerial image",
+    image : "/images/drone_small.jpg",
+    imageName : "Drone",
     answer : ["Machine Learning", "Virtual Reality", "Internet of Things (IoT)"],
     correctAnswer : "a",
     context : "Machine learning can be used in combination with remote sensing to effectively target millions of farmers in need of training.",
