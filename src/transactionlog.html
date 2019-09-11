@@ -19,9 +19,6 @@
   </body>
 
 
-
-
-
 <script>
   var xhr = new XMLHttpRequest();
   xhr.open("GET", "https://api.labssvlaunch.org/contract", true);
@@ -42,7 +39,7 @@
         timeStamp.innerHTML = data["UserList"][i].Timestamp;
         userID.innerHTML = data["UserList"][i].UserID;
         txFee.innerHTML = data["UserList"][i].TxFee;
-        link.innerHTML = data["UserList"][i].Link;
+        link.innerHTML = "<a href="+data["UserList"][i].Link+">link</a>";
       }
     }
   }
