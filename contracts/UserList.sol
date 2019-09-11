@@ -8,15 +8,19 @@ contract UserList {
     uint userID;
   }
 
+  event NewUser(
+    uint _listNum,
+    uint _userID
+  );
+
   mapping(uint => User) public users;
 
-  constructor() public {
-    createUser(23576);
-  }
+  constructor() public {}
 
   function createUser(uint _userID) public {
     userCount ++;
     users[userCount] = User(userCount, _userID);
+    emit NewUser(userCount, _userID);
   }
 
 }
