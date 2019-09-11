@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Blockchain Quiz Log Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <table id="transactionLog">
+      <tr>
+        <th>Block</th>
+        <th>Timestamp</th>
+        <th>UserID</th>
+        <th>TxFee</th>
+        <th>Link</th>
+      </tr>
+    </table>
+  </body>
+
+
+
+
+
+<script>
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://api.labssvlaunch.org/contract", true);
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      var table = document.getElementById("transactionLog");
+      var data = JSON.parse(xhr.responseText)
+      for (var i=0; i < data["UserList"].length; i++) {
+        var row = table.insertRow(i+1);
+        var block = row.insertCell(0);
+        var timeStamp = row.insertCell(1);
+        var userID = row.insertCell(2);
+        var txFee = row.insertCell(3);
+        var link = row.insertCell(4);
+
+        block.innerHTML = data["UserList"][i].Block;
+        timeStamp.innerHTML = data["UserList"][i].Timestamp;
+        userID.innerHTML = data["UserList"][i].UserID;
+        txFee.innerHTML = data["UserList"][i].TxFee;
+        link.innerHTML = data["UserList"][i].Link;
+      }
+    }
+  }
+
+  xhr.send()
+</script>
