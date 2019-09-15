@@ -5,7 +5,7 @@ var triviaQuestions = [
     imageName :"Coffee growers",
     answer : ["3 million","12 million","25 million"],
     correctAnswer : "b",
-    context : "The global coffee market is the second largest globally traded commodity after oil. However 80% of the world's 12M coffee farmers earn less than $2/day.",
+    context : "The global coffee market is valued at over $20B, however 80% of the world's 12M coffee farmers earn less than $2/day.",
   },
   {
     question : "In how many countries does TechnoServe have entrepreneurship training programs?",
@@ -45,7 +45,7 @@ var triviaQuestions = [
     imageName : "Coffee wet mill with smartphones",
     answer : ["Blockchain", "Mobile Money", "Remote Sensing"],
     correctAnswer : "a",
-    context : "Blockchain 'smart contracts' can provide buyers and farmers with with trusted data, improving prices for smallholder farmers. ",
+    context : "Blockchain 'smart contracts' can provide buyers and farmers with with trusted data, improving prices for smallholder farmers.",
   },
   {
     question : "How many coffee farmers has TechnoServe trained with better agronomy practices to improve their incomes?",

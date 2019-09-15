@@ -42,6 +42,7 @@
           <p id="userPrompt"></p>
           <p id="quizStatus"></p>
           <p id="backgroundInfo"></p>
+          <p id="endThankYou"></p>
           <button type="button" class="button" onclick="renderQuestion()" id="getNext">Next Question</button>
           <br>
         </header>
@@ -109,8 +110,8 @@
 
     function getID() {
       do {
-        nameCardID = prompt("Please enter the 5-digit number on your name card", "")
-        if (nameCardID.match(/(^\d{5}$)/)) {
+        nameCardID = prompt("Please enter the 4-digit number on your name card", "")
+        if (nameCardID.match(/(^\d{4}$)/)) {
           invalidNameCardID = false;
 
           // rendor question section, get random numbers for questions and push questions to page
@@ -190,7 +191,7 @@
 
           xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
-              window.alert(xhr.responseText)
+              // window.alert(xhr.responseText)
             }
           }
 
@@ -211,11 +212,11 @@
 
         } else {
           displayUserPrompt("You got the last question right!");
+          document.getElementById("backgroundInfo").innerHTML=triviaQuestions[currentQuestion].context;
           endQuiz()
         }
       } else {
         if (questionNum < maxQuestions-1) {
-
           displayQuizProgress();
 
           getNextButton.style.display = "block";
@@ -224,22 +225,23 @@
 
         } else {
           displayUserPrompt("Sorry - you missed the last question.");
+          document.getElementById("backgroundInfo").innerHTML=triviaQuestions[currentQuestion].context;
           endQuiz()
         };
       };
       questionNum++;
-      console.log(`from checkAnswer - questionNum:${questionNum} maxQuestions:${maxQuestions} numCorrect:${numCorrect}`)
+      // console.log(`from checkAnswer - questionNum:${questionNum} maxQuestions:${maxQuestions} numCorrect:${numCorrect}`)
     };
 
     function endQuiz() {
       displayQuizProgress();
       let thankYouMsg = "Thank you for learning more about what we do, and THANK YOU for your support of TechnoServe.";
-      document.getElementById("backgroundInfo").innerHTML=thankYouMsg;
+      document.getElementById("endThankYou").innerHTML=thankYouMsg;
 
     }
 
     function displayQuizProgress() {
-      console.log(`from displayQuizProgress - questionNum:${questionNum} maxQuestions:${maxQuestions} numCorrect:${numCorrect}`)
+      // console.log(`from displayQuizProgress - questionNum:${questionNum} maxQuestions:${maxQuestions} numCorrect:${numCorrect}`)
       if (questionNum < maxQuestions-1) {
         var status=`${numCorrect} out of 7 questions correct. ${maxQuestions-questionNum-1} question(s) remaining.`;
       } else {
